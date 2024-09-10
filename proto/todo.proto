@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package todo;
+
+option go_package = "example.com/todoapp/proto;proto";
+
+// TodoItem represents a task.
+message TodoItem {
+  string id = 1;
+  string title = 2;
+  string description = 3;
+  bool completed = 4;
+  string created_at = 5;
+  string last_updated_at = 6;
+}
+
+// Request and Response messages
+message CreateTodoRequest {
+  TodoItem item = 1;
+}
+
+message CreateTodoResponse {
+  string id = 1;
+}
+
+message GetTodoRequest {
+  string id = 1;
+}
+
+message GetTodoResponse {
+  TodoItem item = 1;
+}
+
+message ListTodosRequest {}
+
+message ListTodosResponse {
+  repeated TodoItem items = 1;
+}
+
+message DeleteTodoRequest {
+  string id = 1;
+}
+
+message DeleteTodoResponse {
+  string id = 1;
+}
+
+// gRPC Service
+service TodoService {
+  rpc CreateTodo (CreateTodoRequest) returns (CreateTodoResponse);
+  rpc GetTodo (GetTodoRequest) returns (GetTodoResponse);
+  rpc ListTodos (ListTodosRequest) returns (ListTodosResponse);
+  rpc DeleteTodo (DeleteTodoRequest) returns (DeleteTodoResponse);
+}
