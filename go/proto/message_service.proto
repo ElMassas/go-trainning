@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package messageservice;
+
+option go_package = ".;proto";
+
+service MessageService {
+  rpc AnalyzeString (MessageRequest) returns (MessageResponse);
+}
+
+message MessageRequest {
+  string input_string = 1;
+}
+
+message MessageResponse {
+  string processed_string = 1;
+}
